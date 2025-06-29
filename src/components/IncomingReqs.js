@@ -21,19 +21,32 @@ const IncomingReqs = () => {
 
     return (
         <>
-            <Typography variant='h4' gutterBottom>
+            <Typography variant='h4' sx={{m:3, textAlign: 'center' }} gutterBottom>
                 Incoming Requests
             </Typography>
             {status === 'loading' && <p>Loading...</p>}
+            {incoming.length === 0 ? 
+            <Typography sx={{textAlign: 'center'}}>No requests yet</Typography> : ""}
             {incoming.map((req) => (
-                <Card key={req.id} sx={{ p: 2, mb: 2 }}>
-                    <Typography>
-                        {req.fromUser.full_name} wants to connect
+                <Card variant='outlined' key={req.id} sx={{ p: 2, mb: 2, textAlign: 'center' }}>
+                    <Typography variant='h5'>
+                        {req.fromUser.full_name}
                     </Typography>
-                    <Button onClick={() => handleRespond(req.id, true)}>
+                    <Typography>
+                        Req was created on:{' '}
+                        {req.created_at.match(/^\d{4}-\d{2}-\d{2}/g)}
+                    </Typography>
+                    <Button
+                        variant='contained'
+                        sx={{ m: 2 }}
+                        onClick={() => handleRespond(req.id, true)}>
                         Accept
                     </Button>
-                    <Button onClick={() => handleRespond(req.id, false)}>
+                    <Button
+                        variant='outlined'
+                        color='error'
+                        sx={{ m: 2 }}
+                        onClick={() => handleRespond(req.id, false)}>
                         Reject
                     </Button>
                 </Card>

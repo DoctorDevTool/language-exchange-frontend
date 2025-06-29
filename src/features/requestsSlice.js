@@ -41,7 +41,7 @@ const requestsSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchOutgoing.fulfilled, (state, action) => {
-                state.outgoing.push(action.payload);
+                state.outgoing = action.payload;
                 state.status = 'succeeded';
                 state.error = null;
             })

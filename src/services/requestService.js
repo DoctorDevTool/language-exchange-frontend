@@ -70,11 +70,31 @@ export const fetchIncoming = createAsyncThunk(
 
 export const fetchOutgoing = createAsyncThunk(
     'requests/outgoing',
-    async (userId, thunkAPI) => {
+    async (thunkAPI) => {
         try {
-            const res = await axios.get(
-                `${API_URL}/requests/outgoing`,
-                userId,
+            const res = await axios.get(`${API_URL}/requests/outgoing`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+
+            return res.data;
+        } catch (err) {
+            return thunkAPI.rejectWithValue(
+                err.response.data.message || err.message
+            );
+        }
+    }
+);
+
+export const acceptReq = createAsyncThunk(
+    'requests/:id/accept',
+    async (reqId, thunkAPI) => {
+        console.log(reqId);
+        try {
+            const res = await axios.put(
+                `${API_URL}/requests/${reqId}/accept`,
+                {},
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem(
@@ -92,34 +112,13 @@ export const fetchOutgoing = createAsyncThunk(
         }
     }
 );
-
-export const acceptReq = createAsyncThunk(
-    'requests/:id/accept',
-    async (reqId, thunkAPI) => {
-        console.log(reqId);
-        try {
-            const res = await axios.put(`${API_URL}/requests/${Number(reqId)}/accept`, 
-            {},
-            {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            });
-
-            return res.data;
-        } catch (err) {
-            return thunkAPI.rejectWithValue(
-                err.response.data.message || err.message
-            );
-        }
-    }
-);
 export const declineReq = createAsyncThunk(
     'requests/:id/decline',
     async (reqId, thunkAPI) => {
         try {
             const res = await axios.put(
                 `${API_URL}/requests/${reqId}/decline`,
+                {},
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem(
