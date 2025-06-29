@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsers } from '../services/userService';
-import { useNavigate } from 'react-router-dom';
 import {
     Box,
     Button,

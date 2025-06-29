@@ -10,7 +10,7 @@ import {
     Alert,
 } from '@mui/material';
 
-function LoginPage() {
+const LoginPage = () => {
     const dispatch = useDispatch();
     const { status, error } = useSelector((state) => state.auth);
 

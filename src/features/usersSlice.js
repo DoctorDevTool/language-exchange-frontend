@@ -8,14 +8,14 @@ import {
 const usersSlice = createSlice({
     name: 'users',
     initialState: {
-        list: [],
+        searchResults: [],
         status: 'idle',
         allLang: [],
         error: null,
     },
     reducers: {
         clearUsers: (state) => {
-            state.list = [];
+            state.searchResults = [];
             state.status = 'idle';
             state.allLang = [];
             state.error = null;
@@ -39,12 +39,12 @@ const usersSlice = createSlice({
 
             .addCase(fetchUsers.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.list = action.payload;
+                state.searchResults = action.payload;
             })
            
             .addCase(langUpdate.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.list = action.payload;
+                state.searchResults = action.payload;
             })
             .addCase(getAllLanguages.fulfilled, (state, action) => {
                 state.status = 'succeeded';

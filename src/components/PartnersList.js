@@ -12,8 +12,8 @@ import {
 import { createReq, deleteReq } from '../services/requestService';
 
 const PartnerListPage = () => {
-    const { list, status, error } = useSelector((state) => state.users);
-    const reqList = useSelector((state) => state.reqs.pending);
+    const { searchResults, status, error } = useSelector((state) => state.users);
+    const reqList = useSelector((state) => state.reqs.outgoing);
 
     const dispatch = useDispatch();
 
@@ -26,12 +26,12 @@ const PartnerListPage = () => {
 
     if (status === 'loading') return <CircularProgress sx={{ m: 3 }} />;
     if (error) return <Alert severity='error'>{error}</Alert>;
-    if (status === 'succeeded' && list.length === 0)
+    if (status === 'succeeded' && searchResults.length === 0)
         return <Typography sx={{ m: 3 }}>No partners found.</Typography>;
 
     return (
         <Box sx={{ p: 3, display: 'flex', justifyContent: 'center' }}>
-            {list.map((user) => (
+            {searchResults.map((user) => (
                 <Card key={user.id} sx={{ display: 'inline-block', m: 1 }}>
                     <CardContent sx={{ p: 3 }}>
                         <Typography variant='h5'>{user.full_name}</Typography>

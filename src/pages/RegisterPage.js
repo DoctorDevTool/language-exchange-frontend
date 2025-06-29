@@ -10,7 +10,7 @@ import {
     Alert,
 } from '@mui/material';
 
-function RegisterPage() {
+const RegisterPage = () => {
     const dispatch = useDispatch();
     const { status, error } = useSelector((state) => state.auth);
 
@@ -19,7 +19,7 @@ function RegisterPage() {
         email: '',
         password: '',
     });
-    
+
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
@@ -77,6 +77,6 @@ function RegisterPage() {
             </Box>
         </Container>
     );
-}
+};
 
 export default RegisterPage;

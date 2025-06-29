@@ -4,7 +4,8 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import PartnerSearchPage from './pages/PartnerSearchPage';
-import PartnerListPage from './pages/PartnersListPage';
+import PartnersList from './components/PartnersList'
+import RequestsPage from './pages/RequestsPage';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
 
@@ -28,14 +29,15 @@ function App() {
                     element={
                         <PrivateRoute>
                             <PartnerSearchPage />
-                            <PartnerListPage />
+                            <PartnersList />
                         </PrivateRoute>
                     }
                 />
                 <Route
-                    path='/list'
+                    path='/requests'
                     element={
                         <PrivateRoute>
+                            <RequestsPage />
                         </PrivateRoute>
                     }
                 />

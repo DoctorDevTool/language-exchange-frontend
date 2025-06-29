@@ -1,20 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createReq, deleteReq } from '../services/requestService';
+import {
+    createReq,
+    deleteReq,
+    fetchIncoming,
+    fetchOutgoing,
+} from '../services/requestService';
 
 const requestsSlice = createSlice({
     name: 'requests',
     initialState: {
-        pending: [],
-        accepted: [],
-        declined: [],
+        incoming: [],
+        outgoing: [],
+        matches: [],
         status: 'idle',
         error: null,
     },
     reducers: {
         clearReqs: (state) => {
-            state.pending = [];
-            state.accepted = [];
-            state.declined = [];
+            state.incoming = [];
+            state.outgoing = [];
+            state.matches = [];
             state.status = 'idle';
             state.error = null;
         },
@@ -26,12 +31,24 @@ const requestsSlice = createSlice({
                 state.error = null;
             })
             .addCase(createReq.fulfilled, (state, action) => {
-                state.pending.push(action.payload);
+                state.outgoing.push(action.payload);
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addCase(fetchIncoming.fulfilled, (state, action) => {
+                state.incoming = action.payload;
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addCase(fetchOutgoing.fulfilled, (state, action) => {
+                state.outgoing.push(action.payload);
                 state.status = 'succeeded';
                 state.error = null;
             })
             .addCase(deleteReq.fulfilled, (state, action) => {
-                state.pending = state.pending.filter(req => req.id !== Number(action.payload))
+                state.outgoing = state.outgoing.filter(
+                    (req) => req.id !== Number(action.payload)
+                );
                 state.status = 'succeeded';
                 state.error = null;
             });

@@ -3,21 +3,23 @@ import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../features/authSlice';
+import { clearUsers } from '../features/usersSlice';
 import { getMe } from '../services/authService';
 import { getAllLanguages } from '../services/userService';
 
-function Navbar() {
+const Navbar = () => {
     const { token } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const getAccAndLang = () => {
         dispatch(getMe(token));
-        dispatch(getAllLanguages())
+        dispatch(getAllLanguages());
     };
 
     const handleLogout = () => {
         dispatch(logout());
+        dispatch(clearUsers());
         navigate('/login');
     };
 
@@ -33,12 +35,23 @@ function Navbar() {
                     <>
                         <Button
                             color='inherit'
+                            // onClick={getAccAndLang}
+                            component={Link}
+                            to='/requests'>
+                            reqs
+                        </Button>
+                        <Button
+                            color='inherit'
                             onClick={getAccAndLang}
                             component={Link}
                             to='/profile'>
                             Profile
                         </Button>
-                        <Button color='inherit' component={Link} to='/search'>
+                        <Button
+                            color='inherit'
+                            onClick={getAccAndLang}
+                            component={Link}
+                            to='/search'>
                             Search Partner
                         </Button>
                         <Button color='inherit' onClick={handleLogout}>
@@ -53,12 +66,11 @@ function Navbar() {
                         <Button color='inherit' component={Link} to='/register'>
                             Register
                         </Button>
-                        
                     </>
                 )}
             </Toolbar>
         </AppBar>
     );
-}
+};
 
 export default Navbar;
