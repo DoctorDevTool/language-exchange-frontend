@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import PartnerSearchPage from './pages/PartnerSearchPage';
 import PartnersList from './components/PartnersList'
@@ -9,6 +9,7 @@ import RequestsPage from './pages/RequestsPage';
 import MatchesPage from './pages/MatchesPage';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
+import LanguageControlPage from './pages/LanguageControlPage';
 
 function App() {
     return (
@@ -47,6 +48,14 @@ function App() {
                     element={
                         <PrivateRoute>
                             <MatchesPage />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path='/languages'
+                    element={
+                        <PrivateRoute>
+                            <LanguageControlPage />
                         </PrivateRoute>
                     }
                 />

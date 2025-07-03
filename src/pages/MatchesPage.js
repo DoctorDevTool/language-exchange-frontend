@@ -13,8 +13,9 @@ const MatchesPage = () => {
 
   return (
     <>
-      <Typography variant="h4" gutterBottom sx={{textAlign: 'center'}}>Your Matches</Typography>
+      <Typography variant="h4" gutterBottom sx={{textAlign: 'center', mt: 2}}>Your Matches</Typography>
       {status === 'pending' && <p>Loading...</p>}
+      {matches.length === 0 && <Typography variant="h6" gutterBottom sx={{textAlign: 'center'}}>No matches found</Typography>}
       {matches?.map(match => (
         <Card key={match.id} sx={{ p: 2, mb: 2, textAlign: 'center' }}>
           <Typography>{match.fromUser.full_name}</Typography>

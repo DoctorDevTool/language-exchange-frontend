@@ -5,10 +5,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../features/authSlice';
 import { clearUsers } from '../features/usersSlice';
 import { getMe } from '../services/authService';
-import { getAllLanguages } from '../services/userService';
+import { getAllLanguages } from '../services/languageControlService';
 
 const Navbar = () => {
-    const { token } = useSelector((state) => state.auth);
+    const { token, user } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -31,7 +31,46 @@ const Navbar = () => {
                         LangExchange
                     </Button>
                 </Typography>
-                {token ? (
+                {token && user.full_name === 'Admin' ? (
+                    <>
+                        <Button
+                            color='warning'
+                            onClick={getAccAndLang}
+                            component={Link}
+                            to='/languages'>
+                            Languages
+                        </Button>
+                        <Button
+                            color='inherit'
+                            onClick={getAccAndLang}
+                            component={Link}
+                            to='/profile'>
+                            Profile
+                        </Button>
+                        <Button
+                            color='inherit'
+                            onClick={getAccAndLang}
+                            component={Link}
+                            to='/search'>
+                            Search Partner
+                        </Button>
+                        <Button
+                            color='inherit'
+                            component={Link}
+                            to='/requests'>
+                            Requests
+                        </Button>
+                        <Button
+                            color='inherit'
+                            component={Link}
+                            to='/matches'>
+                            Matches
+                        </Button>
+                        <Button color='inherit' variant='outlined' sx={{m:2}} onClick={handleLogout}>
+                            Logout
+                        </Button>
+                    </>
+                ) : token ? (
                     <>
                         <Button
                             color='inherit'
@@ -73,6 +112,7 @@ const Navbar = () => {
                         </Button>
                     </>
                 )}
+               
             </Toolbar>
         </AppBar>
     );

@@ -18,7 +18,7 @@ import { langUpdate } from '../services/userService';
 
 const ProfilePage = () => {
     const user = useSelector((state) => state.auth.user);
-    const availableLanguages = useSelector((state) => state.users.allLang);
+    const availableLanguages = useSelector((state) => state.langControl.languages);
 
     const currentNative = user.languages?.filter(
         (language) => language.type === 'native'

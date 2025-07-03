@@ -5,7 +5,7 @@ import { login, register, getMe } from '../services/authService';
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        user: null,
+        user: '',
         token: localStorage.getItem('token') || null,
         status: 'idle',
         error: null,
@@ -13,7 +13,7 @@ const authSlice = createSlice({
 
     reducers: {
         logout(state) {
-            state.user = null;
+            state.user = '';
             state.token = null;
             localStorage.removeItem('token');
         },

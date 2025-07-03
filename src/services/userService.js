@@ -21,20 +21,7 @@ export const fetchUsers = createAsyncThunk(
     }
 );
 
-export const getAllLanguages = createAsyncThunk(
-    'languages',
-    async (thunkAPI) => {
-        try {
-            const res = await axios.get(`${API_URL}/languages`);
 
-            return res.data;
-        } catch (err) {
-            return thunkAPI.rejectWithValue(
-                err.response.data.message || 'Could not get throuph'
-            );
-        }
-    }
-);
 
 export const langUpdate = createAsyncThunk(
     'languages/update',

@@ -1,23 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-    fetchUsers,
-    getAllLanguages,
-    langUpdate,
-} from '../services/userService';
+import { fetchUsers, langUpdate } from '../services/userService';
 
 const usersSlice = createSlice({
     name: 'users',
     initialState: {
         searchResults: [],
         status: 'idle',
-        allLang: [],
         error: null,
     },
     reducers: {
         clearUsers: (state) => {
             state.searchResults = [];
             state.status = 'idle';
-            state.allLang = [];
             state.error = null;
         },
     },
@@ -31,36 +25,23 @@ const usersSlice = createSlice({
                 state.status = 'loading';
                 state.error = null;
             })
-            
-            .addCase(getAllLanguages.pending, (state) => {
-                state.status = 'loading';
-                state.error = null;
-            })
 
             .addCase(fetchUsers.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.searchResults = action.payload;
             })
-           
+
             .addCase(langUpdate.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.searchResults = action.payload;
-            })
-            .addCase(getAllLanguages.fulfilled, (state, action) => {
-                state.status = 'succeeded';
-                state.allLang = action.payload;
             })
 
             .addCase(fetchUsers.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
             })
-           
+
             .addCase(langUpdate.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.payload;
-            })
-            .addCase(getAllLanguages.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
             });
