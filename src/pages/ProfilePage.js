@@ -83,6 +83,7 @@ const ProfilePage = () => {
 
                     <Box sx={{ mt: 3 }}>
                         <Autocomplete
+                            sx={{ mt: 1 }}
                             multiple
                             options={availableLanguages?.map(
                                 (lang) => lang.name
@@ -95,7 +96,6 @@ const ProfilePage = () => {
                                     label='Select native languages'
                                 />
                             )}
-                            sx={{ mt: 1 }}
                         />
                         <Box sx={{ mt: 2 }}>
                             <Typography variant='subtitle1'>

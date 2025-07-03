@@ -4,6 +4,7 @@ import {
     deleteReq,
     fetchIncoming,
     fetchOutgoing,
+    fetchMatches,
 } from '../services/requestService';
 
 const requestsSlice = createSlice({
@@ -42,6 +43,11 @@ const requestsSlice = createSlice({
             })
             .addCase(fetchOutgoing.fulfilled, (state, action) => {
                 state.outgoing = action.payload;
+                state.status = 'succeeded';
+                state.error = null;
+            })
+            .addCase(fetchMatches.fulfilled, (state, action) => {
+                state.matches = action.payload;
                 state.status = 'succeeded';
                 state.error = null;
             })

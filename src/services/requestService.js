@@ -112,6 +112,7 @@ export const acceptReq = createAsyncThunk(
         }
     }
 );
+
 export const declineReq = createAsyncThunk(
     'requests/:id/decline',
     async (reqId, thunkAPI) => {
@@ -127,6 +128,25 @@ export const declineReq = createAsyncThunk(
                     },
                 }
             );
+
+            return res.data;
+        } catch (err) {
+            return thunkAPI.rejectWithValue(
+                err.response.data.message || err.message
+            );
+        }
+    }
+);
+
+export const fetchMatches = createAsyncThunk(
+    'requests/matches',
+    async (thunkAPI) => {
+        try {
+            const res = await axios.get(`${API_URL}/requests/matches`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
 
             return res.data;
         } catch (err) {

@@ -18,15 +18,26 @@ const RegisterPage = () => {
         full_name: '',
         email: '',
         password: '',
+        confirmPassword: '',
     });
+
+    const [localError, setLocalError] = useState(null);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
+        setLocalError(null); 
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(register(form));
+
+        if (form.password !== form.confirmPassword) {
+            setLocalError('Passwords do not match.');
+            return;
+        }
+
+        const { confirmPassword, ...userData } = form;
+        dispatch(register(userData));
     };
 
     return (
@@ -35,6 +46,7 @@ const RegisterPage = () => {
                 <Typography variant='h4' gutterBottom>
                     Register
                 </Typography>
+                {localError && <Alert severity='error'>{localError}</Alert>}
                 {error && <Alert severity='error'>{error}</Alert>}
                 <form onSubmit={handleSubmit}>
                     <TextField
@@ -65,6 +77,17 @@ const RegisterPage = () => {
                         onChange={handleChange}
                         required
                     />
+                    <TextField
+                        fullWidth
+                        label='Confirm Password'
+                        name='confirmPassword'
+                        type='password'
+                        margin='normal'
+                        value={form.confirmPassword}
+                        onChange={handleChange}
+                        required
+                    />
+
                     <Button
                         type='submit'
                         variant='contained'

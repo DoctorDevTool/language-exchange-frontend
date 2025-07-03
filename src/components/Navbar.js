@@ -35,13 +35,6 @@ const Navbar = () => {
                     <>
                         <Button
                             color='inherit'
-                            // onClick={getAccAndLang}
-                            component={Link}
-                            to='/requests'>
-                            reqs
-                        </Button>
-                        <Button
-                            color='inherit'
                             onClick={getAccAndLang}
                             component={Link}
                             to='/profile'>
@@ -54,7 +47,19 @@ const Navbar = () => {
                             to='/search'>
                             Search Partner
                         </Button>
-                        <Button color='inherit' onClick={handleLogout}>
+                        <Button
+                            color='inherit'
+                            component={Link}
+                            to='/requests'>
+                            Requests
+                        </Button>
+                        <Button
+                            color='inherit'
+                            component={Link}
+                            to='/matches'>
+                            Matches
+                        </Button>
+                        <Button color='inherit' variant='outlined' sx={{m:2}} onClick={handleLogout}>
                             Logout
                         </Button>
                     </>
@@ -63,7 +68,7 @@ const Navbar = () => {
                         <Button color='inherit' component={Link} to='/login'>
                             Login
                         </Button>
-                        <Button color='inherit' component={Link} to='/register'>
+                        <Button color='inherit' variant='outlined' sx={{m:2}} component={Link} to='/register'>
                             Register
                         </Button>
                     </>

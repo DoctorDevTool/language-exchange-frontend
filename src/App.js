@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage';
 import PartnerSearchPage from './pages/PartnerSearchPage';
 import PartnersList from './components/PartnersList'
 import RequestsPage from './pages/RequestsPage';
+import MatchesPage from './pages/MatchesPage';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
 
@@ -38,6 +39,14 @@ function App() {
                     element={
                         <PrivateRoute>
                             <RequestsPage />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path='/matches'
+                    element={
+                        <PrivateRoute>
+                            <MatchesPage />
                         </PrivateRoute>
                     }
                 />
