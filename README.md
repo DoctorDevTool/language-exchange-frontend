@@ -29,6 +29,22 @@ REACT_APP_API_URL=your_api_url (example http://localhost:3333/api)
 > [!NOTE]
 > npm start --_this is the command to start the app_
 
+## Usage Instracrions
+
+    1.	Start the backend first – make sure it’s running at the API URL you configured in .env.local.
+    2.	Then start the frontend with npm start.
+    3.	Use the app step by step:
+    •	✅ Register an account
+    •	🔐 Log in
+    •	🌐 Configure your native and target languages
+    •	🔍 Use the search to find matching users
+    •	📤 Send match requests
+    •	📥 View and respond to incoming requests (accept/reject)
+    •	🤝 See confirmed matches
+
+> [!IMPORTANT]
+> First register user with name `Admin`. Only this user has acces to 'Languages' page where you can add new languages to DB
+
 ## Available Scripts
 
 In the project directory, you can run:
