@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../services/authService';
 import {
+    Snackbar,
     TextField,
     Button,
     Container,
@@ -16,9 +17,13 @@ const LoginPage = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [success, setSuccess] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setSuccess(true);
+        setEmail('');
+        setPassword('');
         dispatch(login({ email, password }));
     };
 
@@ -56,9 +61,21 @@ const LoginPage = () => {
                         {status === 'loading' ? 'Logging in...' : 'Login'}
                     </Button>
                 </form>
+                <Snackbar
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    open={success}
+                    autoHideDuration={3000}
+                    onClose={() => setSuccess(false)}>
+                    <Alert
+                        onClose={() => setSuccess(false)}
+                        severity='success'
+                        sx={{ width: '100%' }}>
+                        Logged In!
+                    </Alert>
+                </Snackbar>
             </Box>
         </Container>
     );
-}
+};
 
 export default LoginPage;

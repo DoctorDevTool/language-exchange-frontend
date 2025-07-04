@@ -24,7 +24,7 @@ const PartnerListPage = () => {
         dispatch(deleteReq(e));
     };
 
-    if (status === 'loading') return <CircularProgress sx={{ m: 3 }} />;
+    if (status === 'loading') return <CircularProgress sx={{ m: 3}} />;
     if (error) return <Alert severity='error'>{error}</Alert>;
     if (status === 'succeeded' && searchResults.length === 0)
         return <Typography sx={{ m: 3 }}>No partners found.</Typography>;

@@ -15,10 +15,11 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { langUpdate } from '../services/userService';
 
-
 const ProfilePage = () => {
     const user = useSelector((state) => state.auth.user);
-    const availableLanguages = useSelector((state) => state.langControl.languages);
+    const availableLanguages = useSelector(
+        (state) => state.langControl.languages
+    );
 
     const currentNative = user.languages?.filter(
         (language) => language.type === 'native'
@@ -43,8 +44,8 @@ const ProfilePage = () => {
 
     const toSendForm = {
         native: toSendNative,
-        target: toSendTarget
-    }
+        target: toSendTarget,
+    };
 
     function handleSave() {
         try {
@@ -152,6 +153,7 @@ const ProfilePage = () => {
 
             <Snackbar
                 open={success}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 autoHideDuration={3000}
                 onClose={() => setSuccess(false)}>
                 <Alert

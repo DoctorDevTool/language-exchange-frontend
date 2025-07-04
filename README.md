@@ -22,9 +22,17 @@ REACT_APP_API_URL=your_api_url (example http://localhost:3333/api)
 -    "@mui/icons-material"
 -    "@mui/material"
 -    "@reduxjs/toolkit"
+-    "@testing-library/dom"
+-    "@testing-library/jest-dom"
+-    "@testing-library/react": "
+-    "@testing-library/user-event"
 -    "axios"
+-    "react"
+-    "react-dom"
 -    "react-redux"
 -    "react-router-dom"
+-    "react-scripts"
+-    "web-vitals"
 
 > [!NOTE]
 > npm start --_this is the command to start the app_

@@ -28,23 +28,23 @@ const requestsSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(createReq.pending, (state) => {
-                state.status = 'pending';
+                state.status = 'loading';
                 state.error = null;
             })
             .addCase(fetchIncoming.pending, (state) => {
-                state.status = 'pending';
+                state.status = 'loading';
                 state.error = null;
             })
             .addCase(fetchOutgoing.pending, (state) => {
-                state.status = 'pending';
+                state.status = 'loading';
                 state.error = null;
             })
             .addCase(fetchMatches.pending, (state) => {
-                state.status = 'pending';
+                state.status = 'loading';
                 state.error = null;
             })
             .addCase(deleteReq.pending, (state) => {
-                state.status = 'pending';
+                state.status = 'loading';
                 state.error = null;
             })
             .addCase(createReq.fulfilled, (state, action) => {

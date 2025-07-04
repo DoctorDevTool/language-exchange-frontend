@@ -51,7 +51,7 @@ const RegisterPage = () => {
                 <form onSubmit={handleSubmit}>
                     <TextField
                         fullWidth
-                        label='Username'
+                        label='Full Name'
                         name='full_name'
                         margin='normal'
                         value={form.full_name}

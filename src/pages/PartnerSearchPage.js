@@ -11,25 +11,30 @@ import {
     Typography,
 } from '@mui/material';
 
-
 const PartnerSearchForm = () => {
-    const availableLanguages = useSelector((state) => state.langControl.languages);
+    const { languages, status } = useSelector(
+        (state) => state.langControl
+    );
 
     const [nativeLang, setNative] = useState('');
     const [targetLang, setTarget] = useState('');
 
-    const native = nativeLang ? availableLanguages.find((obj) => obj.name === nativeLang).id : '';
-    const target = targetLang ? availableLanguages.find((obj) => obj.name === targetLang).id : '';
+    const native = nativeLang
+        ? languages.find((obj) => obj.name === nativeLang).id
+        : '';
+    const target = targetLang
+        ? languages.find((obj) => obj.name === targetLang).id
+        : '';
 
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(fetchUsers( {native, target} ));
+        dispatch(fetchUsers({ native, target }));
     };
 
     return (
-        <Box component='form' onSubmit={handleSubmit} sx={{ p: 3}}>
+        <Box component='form' onSubmit={handleSubmit} sx={{ p: 3 }}>
             <Typography variant='h6' gutterBottom>
                 Find Language Partners
             </Typography>
@@ -41,7 +46,7 @@ const PartnerSearchForm = () => {
                     onChange={(e) => setNative(e.target.value)}
                     label='Partner Native Language'
                     required>
-                    {availableLanguages.map((lang) => (
+                    {languages.map((lang) => (
                         <MenuItem key={lang.id} value={lang.name}>
                             {lang.name}
                         </MenuItem>
@@ -56,7 +61,7 @@ const PartnerSearchForm = () => {
                     onChange={(e) => setTarget(e.target.value)}
                     label='Partner Target Language'
                     required>
-                     {availableLanguages.map((lang) => (
+                    {languages.map((lang) => (
                         <MenuItem key={lang.id} value={lang.name}>
                             {lang.name}
                         </MenuItem>
@@ -64,8 +69,12 @@ const PartnerSearchForm = () => {
                 </Select>
             </FormControl>
 
-            <Button variant='contained' type='submit' sx={{ mt: 2 }}>
-                Search
+            <Button
+                variant='contained'
+                type='submit'
+                sx={{ mt: 2 }}
+                disabled={status === 'loading'}>
+                {status === 'loading' ? 'Searching...' : 'Search'}
             </Button>
         </Box>
     );

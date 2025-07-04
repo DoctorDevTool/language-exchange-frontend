@@ -77,7 +77,7 @@ const LanguageControlPage = () => {
                         color='primary'
                         fullWidth
                         disabled={status === 'loading'}>
-                        {status === 'loading' ? 'Logging in...' : 'Add'}
+                        {status === 'loading' ? 'Adding...' : 'Add'}
                     </Button>
                 </form>
             </Box>
