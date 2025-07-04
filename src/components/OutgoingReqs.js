@@ -15,7 +15,7 @@ const OutgoinReqs = () => {
         <>
             <Typography
                 variant='h4'
-                sx={{ m: 3, textAlign: 'center' }}
+                sx={{ mt: 2, textAlign: 'center' }}
                 gutterBottom>
                 Outgoing Requests
             </Typography>

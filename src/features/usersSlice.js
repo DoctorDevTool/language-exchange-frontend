@@ -27,13 +27,15 @@ const usersSlice = createSlice({
             })
 
             .addCase(fetchUsers.fulfilled, (state, action) => {
-                state.status = 'succeeded';
                 state.searchResults = action.payload;
+                state.status = 'succeeded';
+                state.error = null;
             })
 
             .addCase(langUpdate.fulfilled, (state, action) => {
-                state.status = 'succeeded';
                 state.searchResults = action.payload;
+                state.status = 'succeeded';
+                state.error = null;
             })
 
             .addCase(fetchUsers.rejected, (state, action) => {

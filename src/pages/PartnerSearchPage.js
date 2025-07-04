@@ -13,7 +13,7 @@ import {
 
 
 const PartnerSearchForm = () => {
-    const availableLanguages = useSelector((state) => state.users.allLang);
+    const availableLanguages = useSelector((state) => state.langControl.languages);
 
     const [nativeLang, setNative] = useState('');
     const [targetLang, setTarget] = useState('');

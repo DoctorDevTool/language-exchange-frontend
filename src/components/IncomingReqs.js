@@ -21,7 +21,7 @@ const IncomingReqs = () => {
 
     return (
         <>
-            <Typography variant='h4' sx={{m:3, textAlign: 'center' }} gutterBottom>
+            <Typography variant='h4' sx={{mt:2, textAlign: 'center' }} gutterBottom>
                 Incoming Requests
             </Typography>
             {status === 'loading' && <p>Loading...</p>}

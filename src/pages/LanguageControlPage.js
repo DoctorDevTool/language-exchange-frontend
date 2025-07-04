@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllLanguages } from '../services/languageControlService';
 import { useEffect, useState } from 'react';
 import {
+    Alert,
     Container,
     Box,
     Typography,
@@ -40,9 +41,11 @@ const LanguageControlPage = () => {
                     </Typography>
                 )}
                 {status === 'failed' && (
-                    <Typography variant='h6' gutterBottom>
-                        Error: {error}
-                    </Typography>
+                    <Box>
+                        {languages.map((language) => (
+                            <Chip key={language.id} label={language.name} />
+                        ))}
+                    </Box>
                 )}
                 {status === 'succeeded' && (
                     <Box>
@@ -56,6 +59,7 @@ const LanguageControlPage = () => {
                 <Typography variant='h6' gutterBottom>
                     Add Language
                 </Typography>
+                {error && <Alert severity='error'>{error}</Alert>}
                 <form onSubmit={handleSubmit}>
                     <TextField
                         fullWidth

@@ -31,6 +31,22 @@ const requestsSlice = createSlice({
                 state.status = 'pending';
                 state.error = null;
             })
+            .addCase(fetchIncoming.pending, (state) => {
+                state.status = 'pending';
+                state.error = null;
+            })
+            .addCase(fetchOutgoing.pending, (state) => {
+                state.status = 'pending';
+                state.error = null;
+            })
+            .addCase(fetchMatches.pending, (state) => {
+                state.status = 'pending';
+                state.error = null;
+            })
+            .addCase(deleteReq.pending, (state) => {
+                state.status = 'pending';
+                state.error = null;
+            })
             .addCase(createReq.fulfilled, (state, action) => {
                 state.outgoing.push(action.payload);
                 state.status = 'succeeded';
@@ -53,10 +69,30 @@ const requestsSlice = createSlice({
             })
             .addCase(deleteReq.fulfilled, (state, action) => {
                 state.outgoing = state.outgoing.filter(
-                    (req) => req.id !== Number(action.payload)
+                    (req) => req.id !== Number(action.payload.reqId)
                 );
                 state.status = 'succeeded';
                 state.error = null;
+            })
+            .addCase(createReq.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(fetchIncoming.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(fetchOutgoing.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(fetchMatches.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(deleteReq.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
             });
     },
 });
