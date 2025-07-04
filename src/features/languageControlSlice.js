@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllLanguages, addLanguage } from '../services/languageControlService';
+import {
+    getAllLanguages,
+    addLanguage,
+} from '../services/languageControlService';
 
 const languageControlSlice = createSlice({
     name: 'languageControl',
@@ -31,19 +34,19 @@ const languageControlSlice = createSlice({
                 state.error = null;
             })
             .addCase(addLanguage.fulfilled, (state, action) => {
-                state.languages = action.payload;
+                state.languages.push(action.payload);
                 state.status = 'succeeded';
                 state.error = null;
             })
             .addCase(getAllLanguages.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.payload
+                state.error = action.payload;
             })
             .addCase(addLanguage.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.payload
-            })
-    }
+                state.error = action.payload;
+            });
+    },
 });
 
 export const { clearLanguages } = languageControlSlice.actions;

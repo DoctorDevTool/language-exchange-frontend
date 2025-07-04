@@ -29,6 +29,8 @@ const LanguageControlPage = () => {
         dispatch(addLanguage(newLanguageName));
     };
 
+    
+
     return (
         <Container maxWidth='sm'>
             <Box mt={5}>
@@ -42,14 +44,14 @@ const LanguageControlPage = () => {
                 )}
                 {status === 'failed' && (
                     <Box>
-                        {languages.map((language) => (
+                        {languages?.map((language) => (
                             <Chip key={language.id} label={language.name} />
                         ))}
                     </Box>
                 )}
                 {status === 'succeeded' && (
                     <Box>
-                        {languages.map((language) => (
+                        {languages?.map((language) => (
                             <Chip key={language.id} label={language.name} />
                         ))}
                     </Box>
