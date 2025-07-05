@@ -37,7 +37,7 @@ REACT_APP_API_URL=your_api_url (example http://localhost:3333/api)
 > [!NOTE]
 > npm start --_this is the command to start the app_
 
-## Usage Instracrions
+## Usage Instructions
 
     1.	Start the backend first – make sure it’s running at the API URL you configured in .env.local.
     2.	Then start the frontend with npm start.
