@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../services/authService';
 import {
+    Snackbar,
     TextField,
     Button,
     Container,
@@ -25,8 +26,10 @@ const RegisterPage = () => {
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
-        setLocalError(null); 
+        setLocalError(null);
     };
+
+    const [success, setSuccess] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,9 +38,16 @@ const RegisterPage = () => {
             setLocalError('Passwords do not match.');
             return;
         }
-
+        setSuccess(true);
+        
         const { confirmPassword, ...userData } = form;
         dispatch(register(userData));
+        setForm({
+            full_name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+        })
     };
 
     return (
@@ -87,7 +97,6 @@ const RegisterPage = () => {
                         onChange={handleChange}
                         required
                     />
-
                     <Button
                         type='submit'
                         variant='contained'
@@ -97,6 +106,18 @@ const RegisterPage = () => {
                         {status === 'loading' ? 'Registering...' : 'Register'}
                     </Button>
                 </form>
+                <Snackbar
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    open={success && status === 'succeeded'}
+                    autoHideDuration={3000}
+                    onClose={() => setSuccess(false)}>
+                    <Alert
+                        onClose={() => setSuccess(false)}
+                        severity='success'
+                        sx={{ width: '100%' }}>
+                        Logged In!
+                    </Alert>
+                </Snackbar>
             </Box>
         </Container>
     );

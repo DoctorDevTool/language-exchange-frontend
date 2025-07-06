@@ -22,11 +22,6 @@ const usersSlice = createSlice({
                 state.status = 'loading';
                 state.error = null;
             })
-            // .addCase(langUpdate.pending, (state) => {
-            //     state.searchResults = [];
-            //     state.status = 'loading';
-            //     state.error = null;
-            // })
 
             .addCase(fetchUsers.fulfilled, (state, action) => {
                 state.searchResults = action.payload;
@@ -34,21 +29,10 @@ const usersSlice = createSlice({
                 state.error = null;
             })
 
-            // .addCase(langUpdate.fulfilled, (state, action) => {
-            //     state.searchResults = action.payload;
-            //     state.status = 'succeeded';
-            //     state.error = null;
-            // })
-
             .addCase(fetchUsers.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
-            })
-
-            // .addCase(langUpdate.rejected, (state, action) => {
-            //     state.status = 'failed';
-            //     state.error = action.payload;
-            // });
+            });
     },
 });
 
