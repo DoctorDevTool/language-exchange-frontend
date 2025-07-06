@@ -13,7 +13,7 @@ import {
     Alert,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { langUpdate } from '../services/userService';
+import { langUpdate } from '../services/authService'
 
 const ProfilePage = () => {
     const user = useSelector((state) => state.auth.user);

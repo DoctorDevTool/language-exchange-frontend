@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { login, register, getMe } from '../services/authService';
-
+import { login, register, getMe, langUpdate } from '../services/authService';
 
 const authSlice = createSlice({
     name: 'auth',
@@ -20,6 +19,10 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(register.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.error = null;
+            })
             .addCase(login.fulfilled, (state, action) => {
                 state.user = action.payload.user;
                 state.token = action.payload.token;
@@ -31,19 +34,24 @@ const authSlice = createSlice({
                 state.status = 'succeeded';
                 state.error = null;
             })
-            .addCase(register.fulfilled, (state, action) => {
+            .addCase(langUpdate.fulfilled, (state, action) => {
+                state.user = action.payload;
                 state.status = 'succeeded';
                 state.error = null;
-            })
-            .addCase(login.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.payload;
             })
             .addCase(register.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
             })
+            .addCase(login.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
             .addCase(getMe.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload;
+            })
+            .addCase(langUpdate.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
             });

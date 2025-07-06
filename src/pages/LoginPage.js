@@ -20,11 +20,15 @@ const LoginPage = () => {
     const [success, setSuccess] = useState(false);
 
     const handleSubmit = (e) => {
+       try{
         e.preventDefault();
-        setSuccess(true);
         setEmail('');
         setPassword('');
+        setSuccess(true);
         dispatch(login({ email, password }));
+       }catch(err){
+        console.error('Login failed:', err);
+       }
     };
 
     return (
@@ -63,7 +67,7 @@ const LoginPage = () => {
                 </form>
                 <Snackbar
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    open={success}
+                    open={success && status === 'succeeded'}
                     autoHideDuration={3000}
                     onClose={() => setSuccess(false)}>
                     <Alert

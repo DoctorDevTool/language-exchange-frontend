@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchUsers, langUpdate } from '../services/userService';
+import { fetchUsers } from '../services/userService';
 
 const usersSlice = createSlice({
     name: 'users',
@@ -18,13 +18,15 @@ const usersSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchUsers.pending, (state) => {
+                state.searchResults = [];
                 state.status = 'loading';
                 state.error = null;
             })
-            .addCase(langUpdate.pending, (state) => {
-                state.status = 'loading';
-                state.error = null;
-            })
+            // .addCase(langUpdate.pending, (state) => {
+            //     state.searchResults = [];
+            //     state.status = 'loading';
+            //     state.error = null;
+            // })
 
             .addCase(fetchUsers.fulfilled, (state, action) => {
                 state.searchResults = action.payload;
@@ -32,21 +34,21 @@ const usersSlice = createSlice({
                 state.error = null;
             })
 
-            .addCase(langUpdate.fulfilled, (state, action) => {
-                state.searchResults = action.payload;
-                state.status = 'succeeded';
-                state.error = null;
-            })
+            // .addCase(langUpdate.fulfilled, (state, action) => {
+            //     state.searchResults = action.payload;
+            //     state.status = 'succeeded';
+            //     state.error = null;
+            // })
 
             .addCase(fetchUsers.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload;
             })
 
-            .addCase(langUpdate.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.payload;
-            });
+            // .addCase(langUpdate.rejected, (state, action) => {
+            //     state.status = 'failed';
+            //     state.error = action.payload;
+            // });
     },
 });
 

@@ -46,7 +46,7 @@ const PartnerSearchForm = () => {
                     onChange={(e) => setNative(e.target.value)}
                     label='Partner Native Language'
                     required>
-                    {languages.map((lang) => (
+                    {languages?.map((lang) => (
                         <MenuItem key={lang.id} value={lang.name}>
                             {lang.name}
                         </MenuItem>
@@ -61,7 +61,7 @@ const PartnerSearchForm = () => {
                     onChange={(e) => setTarget(e.target.value)}
                     label='Partner Target Language'
                     required>
-                    {languages.map((lang) => (
+                    {languages?.map((lang) => (
                         <MenuItem key={lang.id} value={lang.name}>
                             {lang.name}
                         </MenuItem>

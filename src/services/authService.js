@@ -46,3 +46,20 @@ export const getMe = createAsyncThunk('users/me', async (token, thunkAPI) => {
     }
 });
 
+export const langUpdate = createAsyncThunk(
+    'languages/update',
+    async (data, thunkAPI) => {
+        try {
+            const res = await axios.put(`${API_URL}/users/me/languages`, data, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            return res.data;
+        } catch (err) {
+            return thunkAPI.rejectWithValue(
+                err.response.data.message || 'Update failed!'
+            );
+        }
+    }
+);

@@ -31,7 +31,7 @@ const PartnerListPage = () => {
 
     return (
         <Box sx={{ p: 3, display: 'flex', justifyContent: 'center' }}>
-            {searchResults.map((user) => (
+            {searchResults?.map((user) => (
                 <Card key={user.id} sx={{ display: 'inline-block', m: 1 }}>
                     <CardContent sx={{ p: 3 }}>
                         <Typography variant='h5'>{user.full_name}</Typography>
