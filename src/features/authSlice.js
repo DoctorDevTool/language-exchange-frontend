@@ -20,6 +20,22 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(register.pending, (state, action) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(login.pending, (state, action) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(langUpdate.pending, (state, action) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(getMe.pending, (state, action) => {
+                state.status = 'loading';
+                state.error = null;
+            })
             .addCase(register.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.error = null;

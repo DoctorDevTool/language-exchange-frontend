@@ -6,18 +6,11 @@ import { logout } from '../features/authSlice';
 import { clearUsers } from '../features/usersSlice';
 import { clearLanguages } from '../features/languageControlSlice';
 import { clearReqs } from '../features/requestsSlice';
-import { getMe } from '../services/authService';
-import { getAllLanguages } from '../services/languageControlService';
 
 const Navbar = () => {
     const { token, user } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const getAccAndLang = () => {
-        dispatch(getMe());
-        dispatch(getAllLanguages());
-    };
 
     const handleLogout = () => {
         dispatch(logout());
@@ -39,21 +32,18 @@ const Navbar = () => {
                     <>
                         <Button
                             color='warning'
-                            onClick={getAccAndLang}
                             component={Link}
                             to='/languages'>
                             Languages
                         </Button>
                         <Button
                             color='inherit'
-                            onClick={getAccAndLang}
                             component={Link}
                             to='/profile'>
                             Profile
                         </Button>
                         <Button
                             color='inherit'
-                            onClick={getAccAndLang}
                             component={Link}
                             to='/search'>
                             Search Partner
@@ -76,14 +66,12 @@ const Navbar = () => {
                     <>
                         <Button
                             color='inherit'
-                            onClick={getAccAndLang}
                             component={Link}
                             to='/profile'>
                             Profile
                         </Button>
                         <Button
                             color='inherit'
-                            onClick={getAccAndLang}
                             component={Link}
                             to='/search'>
                             Search Partner

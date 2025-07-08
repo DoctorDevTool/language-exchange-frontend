@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../services/authService';
+import { getMe } from '../services/authService';
+import { getAllLanguages } from '../services/languageControlService';
 import {
     Snackbar,
     TextField,
@@ -14,7 +16,7 @@ import {
 
 const LoginPage = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { status, error } = useSelector((state) => state.auth);
 
     const [email, setEmail] = useState('');
@@ -22,25 +24,25 @@ const LoginPage = () => {
     const [success, setSuccess] = useState(false);
 
     const handleSubmit = (e) => {
-       try{
-        e.preventDefault();
-        setEmail('');
-        setPassword('');
-        setSuccess(true);
-        dispatch(login({ email, password }));
-       }catch(err){
-        console.error('Login failed:', err);
-       }
+        try {
+            e.preventDefault();
+            setSuccess(true);
+            dispatch(login({ email, password }));
+        } catch (err) {
+            console.error('Login failed:', err);
+        }
     };
 
     useEffect(() => {
         if (status === 'succeeded') {
             setSuccess(true);
+            dispatch(getMe());
+            dispatch(getAllLanguages());
             setTimeout(() => {
-                navigate('/profile'); 
-            }, 1000); 
+                navigate('/profile');
+            }, 1000);
         }
-    }, [status, navigate]);
+    }, [status, navigate, dispatch]);
 
     return (
         <Container maxWidth='sm'>
