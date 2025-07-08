@@ -15,7 +15,7 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const getAccAndLang = () => {
-        dispatch(getMe(token));
+        dispatch(getMe());
         dispatch(getAllLanguages());
     };
 

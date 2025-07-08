@@ -1,13 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-const API_URL = process.env.REACT_APP_API_URL;
+import axiosInstance from '../api/api';
 
 export const register = createAsyncThunk(
     'auth/register',
     async (userData, thunkAPI) => {
         try {
-            const res = await axios.post(`${API_URL}/auth/register`, userData);
+            const res = await axiosInstance.post(`/auth/register`, userData);
 
             return res.data;
         } catch (err) {
@@ -21,7 +19,7 @@ export const login = createAsyncThunk(
     'auth/login',
     async (credentials, thunkAPI) => {
         try {
-            const res = await axios.post(`${API_URL}/auth/login`, credentials);
+            const res = await axiosInstance.post(`/auth/login`, credentials);
             localStorage.setItem('token', res.data.token);
 
             return res.data;
@@ -32,11 +30,9 @@ export const login = createAsyncThunk(
         }
     }
 );
-export const getMe = createAsyncThunk('users/me', async (token, thunkAPI) => {
+export const getMe = createAsyncThunk('users/me', async (thunkAPI) => {
     try {
-        const res = await axios.get(`${API_URL}/users/me`, {
-            headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axiosInstance.get(`/users/me`);
 
         return res.data;
     } catch (err) {
@@ -50,11 +46,7 @@ export const langUpdate = createAsyncThunk(
     'languages/update',
     async (data, thunkAPI) => {
         try {
-            const res = await axios.put(`${API_URL}/users/me/languages`, data, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            });
+            const res = await axiosInstance.put(`/users/me/languages`, data);
             return res.data;
         } catch (err) {
             return thunkAPI.rejectWithValue(

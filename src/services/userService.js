@@ -1,17 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-
-const API_URL = process.env.REACT_APP_API_URL;
+import axiosInstance from '../api/api';
 
 export const fetchUsers = createAsyncThunk(
     'users/fetchUsers',
     async ({ native, target }, thunkAPI) => {
         try {
-            const res = await axios.get(`${API_URL}/users`, {
+            const res = await axiosInstance.get(`/users`, {
                 params: { native, target },
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
             });
 
             return res.data;

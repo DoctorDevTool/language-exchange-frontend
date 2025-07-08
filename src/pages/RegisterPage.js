@@ -115,7 +115,7 @@ const RegisterPage = () => {
                         onClose={() => setSuccess(false)}
                         severity='success'
                         sx={{ width: '100%' }}>
-                        Logged In!
+                        Registered!
                     </Alert>
                 </Snackbar>
             </Box>
