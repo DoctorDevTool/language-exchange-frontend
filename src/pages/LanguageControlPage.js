@@ -26,6 +26,7 @@ const LanguageControlPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setNewLanguageName('')
         dispatch(addLanguage(newLanguageName));
     };
 

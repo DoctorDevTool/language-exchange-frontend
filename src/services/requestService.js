@@ -5,12 +5,9 @@ export const createReq = createAsyncThunk(
     'requests',
     async (userId, thunkAPI) => {
         try {
-            const res = await axiosInstance.post(
-                `/requests`,
-                {
-                    to_user_id: userId,
-                }
-            );
+            const res = await axiosInstance.post(`/requests`, {
+                to_user_id: userId,
+            });
 
             return res.data;
         } catch (err) {
@@ -69,12 +66,8 @@ export const fetchOutgoing = createAsyncThunk(
 export const acceptReq = createAsyncThunk(
     'requests/:id/accept',
     async (reqId, thunkAPI) => {
-        console.log(reqId);
         try {
-            const res = await axiosInstance.put(
-                `/requests/${reqId}/accept`,
-                {}
-            );
+            const res = await axiosInstance.put(`/requests/${reqId}/accept`);
 
             return res.data;
         } catch (err) {
@@ -89,10 +82,7 @@ export const declineReq = createAsyncThunk(
     'requests/:id/decline',
     async (reqId, thunkAPI) => {
         try {
-            const res = await axiosInstance.put(
-                `/requests/${reqId}/decline`,
-                {}
-            );
+            const res = await axiosInstance.put(`/requests/${reqId}/decline`);
 
             return res.data;
         } catch (err) {

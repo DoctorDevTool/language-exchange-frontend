@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../services/authService';
 import {
     Snackbar,
@@ -13,6 +14,7 @@ import {
 
 const LoginPage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const { status, error } = useSelector((state) => state.auth);
 
     const [email, setEmail] = useState('');
@@ -30,6 +32,15 @@ const LoginPage = () => {
         console.error('Login failed:', err);
        }
     };
+
+    useEffect(() => {
+        if (status === 'succeeded') {
+            setSuccess(true);
+            setTimeout(() => {
+                navigate('/profile'); 
+            }, 1000); 
+        }
+    }, [status, navigate]);
 
     return (
         <Container maxWidth='sm'>
@@ -68,7 +79,7 @@ const LoginPage = () => {
                 <Snackbar
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                     open={success && status === 'succeeded'}
-                    autoHideDuration={3000}
+                    autoHideDuration={2000}
                     onClose={() => setSuccess(false)}>
                     <Alert
                         onClose={() => setSuccess(false)}

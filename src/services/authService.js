@@ -41,7 +41,6 @@ export const getMe = createAsyncThunk('users/me', async (thunkAPI) => {
         );
     }
 });
-
 export const langUpdate = createAsyncThunk(
     'languages/update',
     async (data, thunkAPI) => {
