@@ -15,18 +15,20 @@ const RegisterPage = () => {
     const dispatch = useDispatch();
     const { status, error } = useSelector((state) => state.auth);
 
-    const [form, setForm] = useState({
+    const formDefaultState = {
         full_name: '',
         email: '',
         password: '',
         confirmPassword: '',
-    });
+    };
 
-    const [localError, setLocalError] = useState(null);
+    const [form, setForm] = useState(formDefaultState);
+
+    const [passwordError, setPasswordError] = useState(null);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
-        setLocalError(null);
+        setPasswordError(null);
     };
 
     const [success, setSuccess] = useState(false);
@@ -35,19 +37,14 @@ const RegisterPage = () => {
         e.preventDefault();
 
         if (form.password !== form.confirmPassword) {
-            setLocalError('Passwords do not match.');
+            setPasswordError('Passwords do not match.');
             return;
         }
         setSuccess(true);
-        
+
         const { confirmPassword, ...userData } = form;
         dispatch(register(userData));
-        setForm({
-            full_name: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-        })
+        setForm({ formDefaultState });
     };
 
     return (
@@ -56,7 +53,7 @@ const RegisterPage = () => {
                 <Typography variant='h4' gutterBottom>
                     Register
                 </Typography>
-                {localError && <Alert severity='error'>{localError}</Alert>}
+                {passwordError && <Alert severity='error'>{passwordError}</Alert>}
                 {error && <Alert severity='error'>{error}</Alert>}
                 <form onSubmit={handleSubmit}>
                     <TextField
