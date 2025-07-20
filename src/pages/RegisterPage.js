@@ -44,7 +44,7 @@ const RegisterPage = () => {
 
         const { confirmPassword, ...userData } = form;
         dispatch(register(userData));
-        setForm({ formDefaultState });
+        // setForm({ formDefaultState });
     };
 
     return (
@@ -53,7 +53,9 @@ const RegisterPage = () => {
                 <Typography variant='h4' gutterBottom>
                     Register
                 </Typography>
-                {passwordError && <Alert severity='error'>{passwordError}</Alert>}
+                {passwordError && (
+                    <Alert severity='error'>{passwordError}</Alert>
+                )}
                 {error && <Alert severity='error'>{error}</Alert>}
                 <form onSubmit={handleSubmit}>
                     <TextField
